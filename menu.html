@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cafe Bliss Menu</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fffaf0;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      gap: 20px;
+    }
+    .menu-container {
+      flex: 3;
+    }
+    .cart {
+      flex: 1;
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      height: fit-content;
+      position: sticky;
+      top: 20px;
+    }
+    .cart h3 {
+      margin-top: 0;
+    }
+    .cart ul {
+      list-style: none;
+      padding: 0;
+    }
+    .cart li {
+      display: flex;
+      justify-content: space-between;
+      align-items:center ;
+      margin-bottom: 10px;
+    }
+    .cart-total {
+      font-weight: bold;
+      margin-top: 15px;
+    }
+    .buy-btn {
+      margin-top: 15px;
+      width: 100%;
+      padding: 10px;
+      background-color: #3b141c;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .category-nav {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .category-nav button {
+      background-color: #f6b676;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .category-nav button.active {
+      background-color: #3b141c;
+      color: white;
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .menu-card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+    .menu-card:hover {
+      transform: scale(1.03);
+    }
+    .menu-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .menu-card h3 {
+      margin: 10px 0 5px;
+    }
+    .menu-card p {
+      font-size: 0.9rem;
+      color: #555;
+      padding: 0 10px;
+    }
+    .menu-card span {
+      display: block;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+    .menu-card button {
+      background-color: #3b141c;
+      color: white;
+      padding: 10px 20px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .menu-card button:hover {
+      background-color: #f6b676;
+      color: #3b141c;
+    }
+
+    #toggleCart {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}
+  </style>
+    </head>
+    <body>
+        <div class="menu-container">
+            <div class="category-nav">
+                <button class="active" onclick="filterMenu('all')">All</button>
+                <button onclick="filterMenu('tea')">Tea</button>
+                <button onclick="filterMenu('coffee')">Coffee</button>
+                <button onclick="filterMenu('juice')">Juice</button>
+                <button onclick="filterMenu('fastfood')">Fast Food</button>
+                <button onclick="filterMenu('cookies')">Cookies</button>
+            </div>
+
+            <div class="menu-grid" id="menuItems">
+                <div class="menu-card tea">
+                    <img src="images/tea1.png" alt="Masala Chai">
+                    <h3>Masala Chai</h3>
+                    <p>Spiced Indian tea with milk and herbs.</p>
+                    <span>60</span>
+                    <button onclick="addToCart('Masala Chai', 60)"><i
+                            class="fas fa-cart-plus"></i> Add to Cart</button>
+                </div>
+
+                <!--  coffee -->
+
+                <div class="menu-card coffee">
+                    <img src="images/latte.png" alt="Latte">
+                    <h3>Latte</h3>
+                    <p>Smooth espresso with steamed milk.</p>
+                    <span>150</span>
+                    <button onclick="addToCart('Latte', 150)"><i
+                            class="fas fa-cart-plus"></i> Add to Cart</button>
+                </div>
+                <div class="menu-card coffee">
+                    <img src="images/capuccino.png" alt="Cappuccino">
+                    <h3>Cappuccino</h3>
+                    <p>Beloved espresso-based drink.</p>
+                    <span>250</span>
+                    <button onclick="addToCart('Cappuccino', 150)"><i
+                            class="fas fa-cart-plus"></i> Add to Cart</button>
+                </div>
+
+                <div class="menu-card coffee">
+                    <img src="images/americano.png" alt="Americano">
+                    <h3>Americano</h3>
+                    <p>Espresso-based drink poured in hot water.</p>
+                    <span>250</span>
+                    <button onclick="addToCart('Americano', 150)"><i
+                            class="fas fa-cart-plus"></i> Add to Cart</button>
+                </div>
+
+                <div class="menu-card coffee">
+                    <img src="images/expresso.png" alt="Expresso">
+                    <h3>Expresso</h3>
+                    <p>A shot.</p>
+                    <span>250</span>
+                    <button onclick="addToCart('Expresso', 150)"><i
+                            class="fas fa-cart-plus"></i> Add to Cart</button>
+                </div>
+
+                <div class="menu-card coffee">
+                    <img src="images/turkishcoffee.png" alt="Turkish coffee">
+                    <h3>Turkish coffee</h3>
+                    <p>Finely grounded coffee brewed by boilingk.</p>
+                    <span>200</span>
+                    <button onclick="addToCart('Turkish coffee', 150)"><i
+                            class="fas fa-cart-plus"></i> Add to Cart</button>
+                </div>
+
+                <div class="menu-card coffee">
+                    <img src="./images/coldcoffee.jpg" alt="Cold Coffee" />
+                    <h4>Cold Coffee</h4>
+                    <p>Chilled & creamy coffee to refresh your soul.</p>
+                    <span>200</span>
+                    <button onclick="addToCart('Cold Coffee', 150)"><i
+                            class="fas fa-cart-plus"></i> Add to Cart</button>
+                </div>
+
+                <div class="menu-card juice">
+                    <img src="images/juice1.png" alt="Orange Juice">
+                    <h3>Orange Juice</h3>
+                    <p>Freshly squeezed oranges, chilled.</p>
+                    <span>90</span>
+                    <button onclick="addToCart('Orange Juice', 90)"><i
+                            class="fas fa-cart-plus"></i> Add to Cart</button>
+                </div>
+
+                <div class="menu-card fastfood">
+                    <img src="images/fast-food1.png" alt="Veg Burger">
+                    <h3>Veg Burger</h3>
+                    <p>Crispy patty, lettuce, tomato & cheese.</p>
+                    <span>120</span>
+                    <button onclick="addToCart('Veg Burger', 120)"><i
+                            class="fas fa-cart-plus"></i> Add to Cart</button>
+                </div>
+
+                <div class="menu-card cookies">
+                    <img src="images/cookie1.png" alt="Chocolate Cookie">
+                    <h3>Chocolate Cookie</h3>
+                    <p>Loaded with chocolate chips, soft & sweet.</p>
+                    <span>50</span>
+                    <button onclick="addToCart('Chocolate Cookie', 50)"><i
+                            class="fas fa-cart-plus"></i> Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <button id="toggleCart"
+            style="position: fixed; top: 20px; right: 20px; background: #3b141c; color: white; padding: 10px 10px; border-radius: 50%; border: none; z-index: 1000;">
+            🛒
+        </button>
+        <div id="cartPanel"
+            style="display: none; position: fixed; top: 70px; right: 0; width: 300px; height: 100vh; background: #fff; box-shadow: -2px 0 8px rgba(0,0,0,0.2); padding: 20px; overflow-y: auto; z-index: 999;">
+            <h3>Your Cart (<span id="cartCount">0</span>)</h3>
+            <ul id="cartItems" style="list-style: none; padding: 0;"></ul>
+            <hr>
+            <p><strong>Total: ₹<span id="cartTotal">0</span></strong></p>
+            <button onclick="checkout()"
+                style="width: 100%; padding: 10px; background: #3b141c; color: white; border: none; border-radius: 20px;">Buy
+                Now</button>
+        </div>
+
+        <script>
+  const cartItems = [];
+  const cartPanel = document.getElementById('cartPanel');
+  const cartList = document.getElementById('cartItems');
+  const cartCount = document.getElementById('cartCount');
+  const cartTotal = document.getElementById('cartTotal');
+
+  // Toggle cart visibility
+  document.getElementById('toggleCart').addEventListener('click', () => {
+    cartPanel.style.display = cartPanel.style.display === 'none' ? 'block' : 'none';
+  });
+
+  // Handle filter
+  function filterMenu(category) {
+    const buttons = document.querySelectorAll('.category-nav button');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+
+    const cards = document.querySelectorAll('.menu-card');
+    cards.forEach(card => {
+      card.style.display = (category === 'all' || card.classList.contains(category)) ? 'block' : 'none';
+    });
+  }
+
+  // Add to Cart
+  document.querySelectorAll('.menu-card button').forEach((btn, index) => {
+    btn.addEventListener('click', () => {
+      const card = btn.parentElement;
+      const name = card.querySelector('h3').innerText;
+      const price = parseInt(card.querySelector('span').innerText.replace('₹', ''));
+      addToCart(name, price);
+    });
+  });
+
+  function addToCart(name, price) {
+    cartItems.push({ name, price });
+    updateCart();
+  }
+
+  function updateCart() {
+  cartList.innerHTML = '';
+  let total = 0;
+
+  cartItems.forEach((item, index) => {
+    total += item.price;
+
+    const li = document.createElement('li');
+    li.innerHTML = `
+      <span>${item.name} - ₹${item.price}</span>
+      <button onclick="removeFromCart(${index})"
+        style="
+          background:red;
+          color:white;
+          border:none;
+          border-radius:50%;
+          width:24px;
+          height:24px;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          margin-left: 10px;
+          cursor:pointer;
+        ">×</button>
+    `;
+    cartList.appendChild(li);
+  });
+
+  cartCount.innerText = cartItems.length;
+  cartTotal.innerText = total;
+}
+
+
+  function removeFromCart(index) {
+    cartItems.splice(index, 1);
+    updateCart();
+  }
+
+  function checkout() {
+    if (cartItems.length === 0) {
+      alert("Your cart is empty!");
+      return;
+    }
+    alert("Proceeding to checkout...");
+    cartItems.length = 0; // Clear cart
+    updateCart();
+    cartPanel.style.display = 'none';
+  }
+</script>
+
+    </body>
+</html>
